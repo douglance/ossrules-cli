@@ -1,0 +1,17 @@
+{
+    "generated-file-guard": {
+        "name": "Generated file guards",
+        "summary": "Names generated files and the command that rebuilds them.",
+        "detail": "These rules name generated paths and the command that rebuilds them."
+    },
+    "verification-matrix": {
+        "name": "Verification by change type",
+        "summary": "Matches each kind of change to the checks that cover it.",
+        "detail": "A rendering change maps to one command, a protocol change to another."
+    },
+    "nested-instructions": {
+        "name": "Nested instruction files",
+        "summary": "Per-package files with a clear order of precedence.",
+        "detail": "The root file covers the repository; files beside the code add local rules."
+    }
+}

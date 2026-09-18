@@ -1,0 +1,30 @@
+[package]
+name = "ossrules-cli"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT"
+description = "Query the ossrules.md corpus of open-source agent instructions from a terminal, an agent, or an MCP client."
+repository = "https://github.com/douglance/ossrules-cli"
+readme = "README.md"
+keywords = ["agents", "cli", "mcp", "agents-md", "skills"]
+categories = ["command-line-utilities", "development-tools"]
+
+[lib]
+name = "ossrules_cli"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ossrules"
+path = "src/main.rs"
+
+[dependencies]
+incurs = { version = "0.7", features = ["mcp", "yaml"] }
+incurs-extras = "0.7"
+schemars = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+
+[profile.release]
+strip = true

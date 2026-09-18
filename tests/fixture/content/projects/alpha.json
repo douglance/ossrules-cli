@@ -1,0 +1,66 @@
+{
+    "slug": "alpha",
+    "name": "Alpha",
+    "owner": "acme",
+    "repo": "alpha",
+    "language": "Rust",
+    "stars": 4200,
+    "defaultBranch": "main",
+    "lastCommit": {
+        "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "date": "2026-01-02T03:04:05Z"
+    },
+    "evaluatedAt": "2026-02-01",
+    "file": {
+        "bytes": 129,
+        "lines": 10,
+        "words": 22,
+        "headings": 3,
+        "bullets": 1,
+        "codeBlocks": 0,
+        "docLinks": 0
+    },
+    "tagline": "A build tool.",
+    "hook": "A short guide to build commands and one generated file.",
+    "summary": "Alpha's AGENTS.md names its build command and guards one generated file.",
+    "references": [
+        {
+            "path": "worker/AGENTS.md",
+            "label": "Worker guidance"
+        }
+    ],
+    "techniques": [
+        {
+            "title": "Guard the generated schema",
+            "body": "Names the generated path and the command that rebuilds it.",
+            "quote": "Never edit `generated/schema.json` by hand. Run `alpha codegen` instead.",
+            "pattern": "generated-file-guard"
+        },
+        {
+            "title": "Give the build command",
+            "body": "One command, stated up front.",
+            "quote": "- Build: `alpha build`",
+            "pattern": "verification-matrix"
+        },
+        {
+            "title": "Point at worker rules",
+            "body": "Routes worker changes to a nested file.",
+            "sourcePath": "worker/AGENTS.md",
+            "quote": "Run `alpha worker test` before pushing.",
+            "pattern": "nested-instructions"
+        }
+    ],
+    "steal": [
+        "Name the generated file and its rebuild command."
+    ],
+    "outline": [
+        "Alpha",
+        "Commands",
+        "Rules"
+    ],
+    "patterns": [
+        "generated-file-guard",
+        "verification-matrix",
+        "nested-instructions"
+    ]
+}

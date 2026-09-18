@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "slug": "alpha",
+    "repository": "acme/alpha",
+    "branch": "main",
+    "sha": "cccccccccccccccccccccccccccccccccccccccc",
+    "scannedAt": "2026-04-01T00:00:00.000Z",
+    "scope": "Tracked SKILL.md files, excluding tests, fixtures, dependencies, and vendored directories.",
+    "excluded": [],
+    "invalid": [
+        {
+            "path": "tests/skills/broken/SKILL.md",
+            "reason": "Missing or invalid skill description."
+        }
+    ],
+    "skills": [
+        {
+            "id": "alpha-release-0123456789ab",
+            "path": "skills/alpha-release/SKILL.md",
+            "name": "alpha-release",
+            "description": "Cut an Alpha release.",
+            "license": "MIT",
+            "tags": [
+                "release",
+                "ci"
+            ],
+            "files": [
+                {
+                    "path": "SKILL.md",
+                    "blob": "8046f4ae17a8d79bf0f62f198600316ad930e74a",
+                    "bytes": 118,
+                    "text": true,
+                    "mode": "100644"
+                },
+                {
+                    "path": "checklist.md",
+                    "blob": "77fe4d85022155333e05973f0e18ed5d6b015c7c",
+                    "bytes": 31,
+                    "text": true,
+                    "mode": "100644"
+                },
+                {
+                    "path": "logo.png",
+                    "blob": "dddddddddddddddddddddddddddddddddddddddd",
+                    "bytes": 2048,
+                    "text": false,
+                    "mode": "100644"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "generated-file-guard": {
+        "moves": [
+            "Mark generated output",
+            "Name its editable source",
+            "Give the rebuild command"
+        ],
+        "projects": [
+            "alpha"
+        ],
+        "application": "Name the generated file, its editable source, and the rebuild command."
+    }
+}

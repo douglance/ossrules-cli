@@ -1,0 +1,6 @@
+target
+
+# A global ignore excludes the name `AGENTS.md`. In this repository that name is
+# the project's own guidance file and two test fixtures, so it is re-included.
+# A repository .gitignore takes precedence over core.excludesFile.
+!AGENTS.md

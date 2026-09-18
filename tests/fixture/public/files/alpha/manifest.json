@@ -1,0 +1,18 @@
+{
+    "slug": "alpha",
+    "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "license": "MIT",
+    "licensePath": "LICENSE",
+    "files": [
+        {
+            "path": "AGENTS.md",
+            "bytes": 129,
+            "lines": 9
+        },
+        {
+            "path": "worker/AGENTS.md",
+            "bytes": 56,
+            "lines": 3
+        }
+    ]
+}
