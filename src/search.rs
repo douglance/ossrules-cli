@@ -8,7 +8,7 @@ use incurs::command::{TypedContext, TypedResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::corpus::{self, CorpusEnv};
+use crate::corpus::{self, CorpusEnv, THIRD_PARTY_NOTICE};
 use crate::techniques::{self, TechniqueRow};
 
 /// Positional arguments for `search`.
@@ -81,6 +81,8 @@ pub struct SearchOutput {
     pub techniques: Vec<TechniqueRow>,
     /// Matching skills.
     pub skills: Vec<SkillHit>,
+    /// That every `quote` and `description` below is another project's text.
+    pub notice: &'static str,
 }
 
 /// Runs `search`.
@@ -188,6 +190,7 @@ pub async fn run(
         projects: cap(project_hits, limit),
         techniques: cap(technique_hits, limit),
         skills: cap(skill_hits, limit),
+        notice: THIRD_PARTY_NOTICE,
     })
 }
 

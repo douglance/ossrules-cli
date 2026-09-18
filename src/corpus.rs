@@ -687,6 +687,20 @@ impl Provenance {
             notice: THIRD_PARTY_NOTICE,
         }
     }
+
+    /// Builds provenance for a whole repository at a pinned commit.
+    ///
+    /// For a response that describes many files rather than reproducing one. A
+    /// file URL there would name a single path the payload does not single out.
+    pub fn tree(repository: &str, sha: &str, license: Option<String>) -> Self {
+        Self {
+            repository: repository.to_string(),
+            sha: sha.to_string(),
+            license,
+            url: format!("https://github.com/{repository}/tree/{sha}"),
+            notice: THIRD_PARTY_NOTICE,
+        }
+    }
 }
 
 /// Case-insensitive substring test, used by every `--query` filter.

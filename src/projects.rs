@@ -288,22 +288,20 @@ pub async fn source(
         );
     }
 
-    let provenance = Provenance::new(
-        &project.repository(),
-        &manifest.sha,
-        &path,
-        manifest.license.clone(),
-    );
+    let repository = project.repository();
 
     if ctx.options.list {
         return TypedResult::ok(SourceOutput {
+            // A listing describes the snapshot, not one file in it.
+            provenance: Provenance::tree(&repository, &manifest.sha, manifest.license.clone()),
             slug: project.slug,
-            provenance,
             path: None,
             content: None,
             files: manifest.files,
         });
     }
+
+    let provenance = Provenance::new(&repository, &manifest.sha, &path, manifest.license.clone());
 
     match corpus_file(&corpus, &project.slug, &path) {
         Ok(content) => TypedResult::ok(SourceOutput {

@@ -4,7 +4,7 @@ use incurs::command::{TypedContext, TypedResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::corpus::{self, CorpusEnv, Pattern};
+use crate::corpus::{self, CorpusEnv, Pattern, THIRD_PARTY_NOTICE};
 use crate::techniques::{self, TechniqueRow};
 
 /// One catalog pattern with its usage count.
@@ -103,6 +103,8 @@ pub struct PatternDetail {
     pub examples: Vec<TechniqueRow>,
     /// Techniques tagged with it in total, before `--examples`.
     pub tagged: usize,
+    /// That every `quote` in `examples` is another project's text.
+    pub notice: &'static str,
 }
 
 /// Runs `patterns show`.
@@ -151,5 +153,6 @@ pub async fn show(
         projects: slugs,
         examples,
         tagged: total,
+        notice: THIRD_PARTY_NOTICE,
     })
 }

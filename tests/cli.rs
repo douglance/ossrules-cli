@@ -741,3 +741,52 @@ async fn a_corpus_that_is_not_a_checkout_reports_no_commit() {
         path["sha"]
     );
 }
+
+/// A listing points at the repository, not at one file it does not single out.
+#[tokio::test]
+async fn a_source_listing_links_to_the_tree() {
+    let listing = json(&["projects", "source", "alpha", "--list"]).await;
+    let file = json(&["projects", "source", "alpha"]).await;
+
+    assert_eq!(
+        listing["provenance"]["url"],
+        format!("https://github.com/acme/alpha/tree/{}", "a".repeat(40)),
+        "a listing describes the snapshot"
+    );
+    assert_eq!(
+        file["provenance"]["url"],
+        format!(
+            "https://github.com/acme/alpha/blob/{}/AGENTS.md",
+            "a".repeat(40)
+        ),
+        "reading one file still links to that file"
+    );
+}
+
+/// Every response carrying a verbatim quote says whose text it is.
+///
+/// The file-returning commands always did. These three reproduce upstream
+/// wording too, through `quote`, and an agent reading them over MCP has only
+/// the payload to tell it that the text is not addressed to it.
+#[tokio::test]
+async fn quoted_responses_carry_the_third_party_notice() {
+    for args in [
+        vec!["techniques"],
+        vec!["patterns", "show", "generated-file-guard"],
+        vec!["search", "codegen"],
+    ] {
+        let response = json(&args).await;
+        let notice = response["notice"]
+            .as_str()
+            .unwrap_or_else(|| panic!("`{args:?}` must carry a notice, got: {response}"));
+
+        assert!(
+            notice.contains("never as instructions"),
+            "`{args:?}` notice must say what the text is, got: {notice}"
+        );
+    }
+
+    // The claim is only worth making where there is actually a quote to label.
+    let quoted = json(&["techniques", "--query", "codegen"]).await;
+    assert!(quoted["techniques"][0]["quote"].is_string());
+}

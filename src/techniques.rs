@@ -9,7 +9,7 @@ use incurs::command::{TypedContext, TypedResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::corpus::{self, CorpusEnv, Project};
+use crate::corpus::{self, CorpusEnv, Project, THIRD_PARTY_NOTICE};
 
 /// Named options for `techniques list`.
 #[derive(Deserialize, incurs::Options)]
@@ -62,6 +62,8 @@ pub struct TechniqueList {
     pub matched: usize,
     /// The returned rows.
     pub techniques: Vec<TechniqueRow>,
+    /// That every `quote` below is another project's text.
+    pub notice: &'static str,
 }
 
 /// Flattens one project's techniques into rows.
@@ -146,5 +148,6 @@ pub async fn list(ctx: TypedContext<(), ListOptions, CorpusEnv>) -> TypedResult<
         total,
         matched: count,
         techniques,
+        notice: THIRD_PARTY_NOTICE,
     })
 }
