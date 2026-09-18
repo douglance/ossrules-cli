@@ -181,7 +181,19 @@ async fn git(dir: &Path, args: &[&str]) -> Result<String, String> {
     }
 }
 
-/// The commit a checkout is on, or `None` when it is not a Git working tree.
+/// The commit a checkout is on, or `None` when it is not itself a Git working tree.
+///
+/// `git rev-parse` searches upwards, so asking a corpus that is not a checkout
+/// returns whatever repository encloses it. Reporting that as the corpus commit
+/// is worse than reporting nothing: it names a real sha that has nothing to do
+/// with the data, and a caller comparing it against upstream would be comparing
+/// against an unrelated project.
 async fn head_sha(root: &Path) -> Option<String> {
-    git(root, &["rev-parse", "HEAD"]).await.ok()
+    let toplevel = git(root, &["rev-parse", "--show-toplevel"]).await.ok()?;
+    let owns_root = std::fs::canonicalize(&toplevel).ok()? == std::fs::canonicalize(root).ok()?;
+
+    match owns_root {
+        true => git(root, &["rev-parse", "HEAD"]).await.ok(),
+        false => None,
+    }
 }

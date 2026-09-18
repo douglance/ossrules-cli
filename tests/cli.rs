@@ -724,3 +724,20 @@ async fn the_reported_origin_distinguishes_the_flag_from_the_variable() {
     assert_eq!(both.origin, "explicit");
     assert_eq!(both.root().display().to_string(), fixture());
 }
+
+/// A corpus that is not itself a checkout reports no commit.
+///
+/// `git rev-parse` searches upwards, and this fixture lives inside this
+/// repository, so the naive call returns ossrules-cli's own HEAD — a real sha
+/// that describes none of the data being reported.
+#[tokio::test]
+async fn a_corpus_that_is_not_a_checkout_reports_no_commit() {
+    let path = json(&["corpus", "path"]).await;
+
+    assert_eq!(path["root"], fixture());
+    assert!(
+        path["sha"].is_null(),
+        "the fixture is not a Git checkout, got: {}",
+        path["sha"]
+    );
+}
